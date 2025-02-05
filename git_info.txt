@@ -1,0 +1,9 @@
+it remote add origin https://github.com/m-klykov/js_phaser.git
+
+
+git add . && git commit -m "Описание коммита" && git push origin master
+
+на другом компе
+git clone https://github.com/m-klykov/js_phaser.git
+
+git pull origin master - забрать изменения
