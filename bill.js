@@ -1,6 +1,7 @@
 const WIDTH = window.innerWidth; // Ширина экрана
 const HEIGHT = window.innerHeight; // Высота экрана
-const BALL_SIZE = 15;
+const BALL_SIZE = WIDTH / 50;
+const HOLE_SIZE = BALL_SIZE * 1.5;
 
 const config = {
     type: Phaser.AUTO,
@@ -32,7 +33,7 @@ function create() {
     this.add.rectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 0x228B22);
 
     // Создание луз (на краях стола)
-	let dd = 5;
+	let dd = HOLE_SIZE / 5;
     let holePositions = [
         { x: 0+dd, y: 0+dd }, { x: WIDTH-dd, y: 0+dd },
         { x: 0+dd, y: HEIGHT-dd }, { x: WIDTH-dd, y: HEIGHT-dd },
@@ -40,7 +41,7 @@ function create() {
     ];
     
     holePositions.forEach(pos => {
-        let hole = this.add.circle(pos.x, pos.y, 25, 0x000000);
+        let hole = this.add.circle(pos.x, pos.y, HOLE_SIZE, 0x000000);
         holes.push(hole);
     });
 
