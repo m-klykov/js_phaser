@@ -1,4 +1,4 @@
-const WIDTH = 800, HEIGHT = 400;
+const WIDTH = 800, HEIGHT = 400; BALL_SIZE = 15
 const config = {
     type: Phaser.AUTO,
     width: WIDTH,
@@ -25,9 +25,10 @@ function create() {
     this.add.rectangle(WIDTH / 2, HEIGHT / 2, WIDTH, HEIGHT, 0x228B22);
 
     // Создание луз (на краях стола)
+	let dd = 5;
     let holePositions = [
-        { x: 0, y: 0 }, { x: WIDTH, y: 0 },
-        { x: 0, y: HEIGHT }, { x: WIDTH, y: HEIGHT },
+        { x: 0+dd, y: 0+dd }, { x: WIDTH-dd, y: 0+dd },
+        { x: 0+dd, y: HEIGHT-dd }, { x: WIDTH-dd, y: HEIGHT-dd },
         { x: WIDTH / 2, y: 0 }, { x: WIDTH / 2, y: HEIGHT }
     ];
     
@@ -37,7 +38,7 @@ function create() {
     });
 
     // Создание пирамиды из 10 шаров (повернутой углом)
-    let startX = WIDTH * 0.7, startY = HEIGHT / 2, offset = 22;
+    let startX = WIDTH * 0.7, startY = HEIGHT / 2, offset = BALL_SIZE * 1.7;
     let pyramidPositions = []
 	
 	pyramidPositions.push({ x: WIDTH * 0.3, y: startY });
@@ -51,9 +52,9 @@ function create() {
 
     
     pyramidPositions.forEach(pos => {
-        let ball = scene.add.circle(pos.x, pos.y, 10, 0xffffff);
+        let ball = scene.add.circle(pos.x, pos.y, BALL_SIZE, 0xffffff);
         scene.physics.add.existing(ball);
-        ball.body.setCircle(10);
+        ball.body.setCircle(BALL_SIZE);
         ball.body.setCollideWorldBounds(true);
         ball.body.setBounce(0.8);
         ball.body.setDamping(true);
@@ -76,7 +77,7 @@ function create() {
 
     // Обработчики мыши для удара
     this.input.on('pointerdown', (pointer) => {
-        if (selectedBall && Phaser.Math.Distance.Between(pointer.x, pointer.y, selectedBall.x, selectedBall.y) < 15) {
+        if (selectedBall && Phaser.Math.Distance.Between(pointer.x, pointer.y, selectedBall.x, selectedBall.y) < BALL_SIZE) {
 			selectedBall.body.setVelocity(0, 0);
             isDragging = true;
             startX = pointer.x;
@@ -127,7 +128,7 @@ function update(time) {
     balls.forEach(ball => {
 		let has_ball = 1
         holes.forEach(hole => {
-            if (Phaser.Math.Distance.Between(ball.x, ball.y, hole.x, hole.y) < 25) {
+            if (Phaser.Math.Distance.Between(ball.x, ball.y, hole.x, hole.y) < BALL_SIZE*2) {
                 balls = balls.filter(b => b !== ball);
                 ball.destroy();
 				has_ball = 0
