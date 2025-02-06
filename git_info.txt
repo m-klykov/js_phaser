@@ -9,3 +9,5 @@ git clone https://github.com/m-klykov/js_phaser.git
 git pull origin master - забрать изменения
 
 https://m-klykov.github.io/js_phaser/
+
+https://m-klykov.github.io/js_phaser/ball.html

@@ -1,4 +1,7 @@
-const WIDTH = 800, HEIGHT = 400; BALL_SIZE = 15
+const WIDTH = window.innerWidth; // Ширина экрана
+const HEIGHT = window.innerHeight; // Высота экрана
+const BALL_SIZE = 15;
+
 const config = {
     type: Phaser.AUTO,
     width: WIDTH,
@@ -17,6 +20,10 @@ const game = new Phaser.Game(config);
 let balls = [], isDragging = false, startX, startY, aimLine, trajectoryLine;
 let holes = [], lastMovementTime = 0;
 let selectedBall = null; // Храним выбранный шар
+
+window.addEventListener('resize', () => {
+    game.scale.resize(window.innerWidth, window.innerHeight);
+});
 
 function create() {
     const scene = this;
