@@ -7,3 +7,5 @@ git add . && git commit -m "Описание коммита" && git push origin 
 git clone https://github.com/m-klykov/js_phaser.git
 
 git pull origin master - забрать изменения
+
+https://m-klykov.github.io/js_phaser/
